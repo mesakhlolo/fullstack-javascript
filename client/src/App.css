@@ -3,5 +3,29 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  padding-top: 4rem;
   font-family: Arial, sans-serif;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #007bff;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #0056b3;
+  color: white;
 }
