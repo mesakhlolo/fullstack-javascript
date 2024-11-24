@@ -11,7 +11,7 @@ function Post() {
     axios.get(`http://localhost:8080/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
     });
-  });
+  }, [id]);
 
   return (
     <div className="post-container">
