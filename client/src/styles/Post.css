@@ -44,6 +44,36 @@
   margin-bottom: 10px;
 }
 
+.add-comment-container {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.add-comment-container input {
+  flex: 1;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-comment-container button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-comment-container button:hover {
+  background-color: #0056b3;
+}
+
+.list-of-comments {
+  margin-top: 10px;
+}
+
 .comment {
   background-color: #fff;
   padding: 10px;
