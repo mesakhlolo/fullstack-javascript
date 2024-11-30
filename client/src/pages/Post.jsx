@@ -21,16 +21,26 @@ function Post() {
 
   const addComment = () => {
     axios
-      .post("http://localhost:8080/comments", {
-        commentBody: newComment,
-        PostId: id,
-      })
+      .post(
+        "http://localhost:8080/comments",
+        {
+          commentBody: newComment,
+          PostId: id,
+        },
+        {
+          headers: {
+            accessToken: sessionStorage.getItem("accessToken"),
+          },
+        }
+      )
       .then((response) => {
-        console.log(response);
-
-        const newCommentToAdd = { commentBody: newComment };
-        setComments([...comments, newCommentToAdd]);
-        setNewComment(""); // to clear the comment input
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          const newCommentToAdd = { commentBody: newComment };
+          setComments([...comments, newCommentToAdd]);
+          setNewComment("");
+        }
       });
   };
 
