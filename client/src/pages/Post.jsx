@@ -29,7 +29,7 @@ function Post() {
         },
         {
           headers: {
-            accessToken: sessionStorage.getItem("accessToken"),
+            accessToken: localStorage.getItem("accessToken"),
           },
         }
       )
@@ -37,7 +37,10 @@ function Post() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          const newCommentToAdd = { commentBody: newComment };
+          const newCommentToAdd = {
+            commentBody: newComment,
+            username: response.data.username,
+          };
           setComments([...comments, newCommentToAdd]);
           setNewComment("");
         }
@@ -69,6 +72,7 @@ function Post() {
             return (
               <div className="comment" key={key}>
                 {comment.commentBody}
+                <span>{comment.username}</span>
               </div>
             );
           })}
