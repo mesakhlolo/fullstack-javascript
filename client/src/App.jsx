@@ -23,7 +23,7 @@ function App() {
       })
       .then((response) => {
         if (response.data.error) {
-          setAuthState({ ...authState, status: false });
+          setAuthState((prevState) => ({ ...prevState, status: false }));
         } else {
           setAuthState({
             username: response.data.username,
