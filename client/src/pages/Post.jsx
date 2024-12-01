@@ -100,7 +100,7 @@ function Post() {
                 {authState.username === comment.username && (
                   <button
                     className="delete-comment-button"
-                    onClick={() => deleteComment(key)}
+                    onClick={() => deleteComment(comment.id)}
                   >
                     Delete
                   </button>
