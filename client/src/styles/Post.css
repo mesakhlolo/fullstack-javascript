@@ -81,3 +81,33 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.comment-username {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.delete-comment-button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-comment-button:hover {
+  background-color: #c82333;
+}
+
+.comment-body {
+  font-size: 1em;
+  color: #333;
+}

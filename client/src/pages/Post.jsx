@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "../styles/Post.css";
+import { AuthContext } from "../helpers/AuthContext";
 
 function Post() {
   let { id } = useParams();
   const [postObject, setPostObject] = useState({});
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const { authState } = useContext(AuthContext);
 
   useEffect(() => {
     axios.get(`http://localhost:8080/posts/byId/${id}`).then((response) => {
@@ -47,6 +49,28 @@ function Post() {
       });
   };
 
+  const deleteComment = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this comment?"
+    );
+
+    if (confirmDelete) {
+      axios
+        .delete(`http://localhost:8080/comments/${id}`, {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        })
+        .then(() => {
+          setComments(
+            comments.filter((comment) => {
+              return comment.id != id;
+            })
+          );
+        });
+    }
+  };
+
   return (
     <div className="post-container">
       <div className="post-content">
@@ -68,14 +92,23 @@ function Post() {
           <button onClick={addComment}>Add Comment</button>
         </div>
         <div className="list-of-comments">
-          {comments.map((comment, key) => {
-            return (
-              <div className="comment" key={key}>
-                {comment.commentBody}
-                <span>{comment.username}</span>
+          {comments.map((comment, key) => (
+            <div key={key} className="comment">
+              <div className="comment-header">
+                <span className="comment-username">{comment.username}</span>
+
+                {authState.username === comment.username && (
+                  <button
+                    className="delete-comment-button"
+                    onClick={() => deleteComment(key)}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
-            );
-          })}
+              <div className="comment-body">{comment.commentBody}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

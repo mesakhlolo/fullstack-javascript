@@ -22,7 +22,7 @@ function CreatePost() {
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),
-    postText: Yup.string().required(),
+    postText: Yup.string().max(255, "Post text is too long").required(),
     username: Yup.string().min(3).max(15).required(),
   });
 
