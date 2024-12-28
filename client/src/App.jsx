@@ -51,6 +51,8 @@ function App() {
             <div className="navbar-links">
               <Link to="/">Home</Link>
               <Link to="/createpost">Create A Post</Link>
+            </div>
+            <div className="navbar-right">
               {!authState.status ? (
                 <>
                   <Link to="/login">Login</Link>
