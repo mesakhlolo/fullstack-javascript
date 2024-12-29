@@ -28,6 +28,7 @@
 .navbar-right {
   display: flex;
   align-items: center;
+  margin-left: auto;
 }
 
 .navbar a {
