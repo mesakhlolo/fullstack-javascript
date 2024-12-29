@@ -10,6 +10,7 @@ const Home = () => {
   const [listOfPosts, setListOfPosts] = useState([]);
   const [likedPosts, setLikedPost] = useState([]);
   const { authState } = useContext(AuthContext);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const Home = () => {
           );
         });
     }
-  }, []);
+  }, [authState.status, navigate]);
 
   const likeAPost = (postId) => {
     axios

@@ -21,7 +21,7 @@ function CreatePost() {
     if (!authState.status) {
       navigate("/login");
     }
-  }, []);
+  }, [authState.status, navigate]);
 
   const onSubmit = (data) => {
     axios.post("http://localhost:8080/posts", data).then((response) => {
