@@ -12,7 +12,6 @@ function CreatePost() {
   const initialValue = {
     title: "",
     postText: "",
-    username: "",
   };
 
   const { authState } = useContext(AuthContext);
@@ -24,16 +23,19 @@ function CreatePost() {
   }, [authState.status, navigate]);
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:8080/posts", data).then((response) => {
-      console.log(response.status);
-      navigate(`/`);
-    });
+    axios
+      .post("http://localhost:8080/posts", data, {
+        headers: { accessToken: localStorage.getItem("accessToken") },
+      })
+      .then((response) => {
+        console.log(response.status);
+        navigate(`/`);
+      });
   };
 
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(),
     postText: Yup.string().max(255, "Post text is too long").required(),
-    username: Yup.string().min(3).max(15).required(),
   });
 
   return (
@@ -56,15 +58,6 @@ function CreatePost() {
               id="postText"
               name="postText"
               placeholder="Ex. Some Post..."
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="username">Username: </label>
-            <ErrorMessage name="username" component="span" />
-            <Field
-              id="username"
-              name="username"
-              placeholder="Ex. Jotaro88..."
             />
           </div>
           <button type="submit" className="submit-button">
