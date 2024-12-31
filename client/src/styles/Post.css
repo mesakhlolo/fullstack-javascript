@@ -34,6 +34,20 @@
   text-align: right;
 }
 
+.delete-post-button {
+  padding: 10px 20px;
+  margin-left: 20px;
+  border: none;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-post-button:hover {
+  background-color: #c82333;
+}
+
 .comments-section {
   flex: 0.4;
   padding: 10px;

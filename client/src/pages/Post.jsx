@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import "../styles/Post.css";
 import { AuthContext } from "../helpers/AuthContext";
@@ -10,6 +10,8 @@ function Post() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const { authState } = useContext(AuthContext);
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:8080/posts/byId/${id}`).then((response) => {
@@ -71,12 +73,37 @@ function Post() {
     }
   };
 
+  const deletePost = (id) => {
+    axios
+      .delete(`http://localhost:8080/posts/${id}`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then(() => {
+        alert("POST DELETED SUCCESSFULLY");
+        navigate("/");
+      });
+  };
+
   return (
     <div className="post-container">
       <div className="post-content">
         <div className="post-title">{postObject.title}</div>
         <div className="post-body">{postObject.postText}</div>
-        <div className="post-footer">Posted by: {postObject.username}</div>
+        <div className="post-footer">
+          Posted by: {postObject.username}
+          {authState.username === postObject.username && (
+            <button
+              className="delete-post-button"
+              onClick={() => {
+                deletePost(postObject.id);
+              }}
+            >
+              Delete Post
+            </button>
+          )}
+        </div>
       </div>
       <div className="comments-section">
         <h3>Comments</h3>
