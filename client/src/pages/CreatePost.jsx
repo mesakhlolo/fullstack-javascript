@@ -17,7 +17,7 @@ function CreatePost() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!authState.status) {
+    if (!localStorage.getItem("accessToken")) {
       navigate("/login");
     }
   }, [authState.status, navigate]);
